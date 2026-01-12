@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Task1</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+  <link href="bootstrap.min.css" rel="stylesheet">
+</head>
+ 
+<body>
+ 
+<div class="container mt-3">
+ 
+<form action="submit.html" class="needs-validation" novalidate>
+ 
+  <div class="mb-3 mt-3">
+    <label for="email">Email:</label>
+    <input type="email" class="form-control" id="email"
+    pattern="[a-z0-9.^@\s]+@[a-z^@\s]+\.[.a-z^@\s]+"
+ 
+      required>
+    <div class="valid-feedback">Valid.</div>
+    <div class="invalid-feedback">Please enter a valid email.</div>
+  </div>
+ 
+ 
+  <div class="mb-3">
+    <label for="pwd">Password:</label>
+    <input type="password" class="form-control" id="pwd"
+      pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#^]).{6,}$"
+      required>
+    <div class="valid-feedback">Valid.</div>
+    <div class="invalid-feedback">
+      Must contain uppercase, lowercase, number, special character and at least 6 characters
+    </div>
+  </div>
+ 
+ 
+  <div class="mb-3">
+    <label for="confirm">Confirm Password:</label>
+    <input type="password" class="form-control" id="confirm" required>
+    <div class="valid-feedback">Valid.</div>
+    <div class="invalid-feedback">Password does not match.</div>
+  </div>
+ 
+  <div class="mb-3">
+    <label for="url">URL:</label>
+    <input type="url" class="form-control" id="url" required>
+    <div class="valid-feedback">Valid.</div>
+    <div class="invalid-feedback">Please enter a valid URL.</div>
+  </div>
+ 
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+ 
+</div>
+ 
+<script>
+(() => {
+  'use strict';
+ 
+  const form = document.querySelector('.needs-validation');
+  const password = document.getElementById('pwd');
+  const confirmPass = document.getElementById('confirm');
+ 
+  function validatePasswords() {
+    if (confirmPass.value === "") {
+      confirmPass.setCustomValidity("");
+      return;
+    }
+ 
+    if (password.value !== confirmPass.value) {
+      confirmPass.setCustomValidity("Passwords do not match");
+    } else {
+      confirmPass.setCustomValidity("");
+    }
+  }
+ 
+  password.addEventListener("input", validatePasswords);
+  confirmPass.addEventListener("input", validatePasswords);
+ 
+  form.addEventListener('submit', event => {
+    validatePasswords();
+ 
+    if (!form.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+ 
+    form.classList.add('was-validated');
+  });
+ 
+})();
+</script>
+ 
+</body>
+</html>
+ 
+ 
